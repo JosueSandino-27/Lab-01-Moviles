@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 8, 2021, 8:41:20 PM
+    Author     : Josue
+*/
+
+body{
+
+    background-image: url('Imagenes/admin_wallpaper.jpg');
+}
+
+.title{
+    color:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+.navBar{
+    background-color: white;
+    justify-content: center;
+}
+
+
+
+.nav-link{
+    color: black;
+    font-size: 15px;
+}
+
+
+
+th {
+    text-align:left
+}
