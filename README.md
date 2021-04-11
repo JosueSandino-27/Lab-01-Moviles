@@ -33,8 +33,7 @@ create procedure modificar_pais(
 IN  AUX_siglas varchar(20), 
 IN AUX_nombrePais varchar(20))
 BEGIN
-UPDATE siglas,nombrePais
+UPDATE proyecto2.pais
 SET
-siglas = AUX_siglas, 
-nombrePais = AUX_nombrePais;
+nombrePais = AUX_nombrePais WHERE siglas =  AUX_siglas;
 END //
