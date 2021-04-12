@@ -34,3 +34,6 @@ function validarMensaje(evt){
         window.location.href="admin.html";
     }
 }
+
+
+//COMMIT
