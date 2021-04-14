@@ -34,8 +34,7 @@ public class GestorPais {
         try (Connection cnx = obtenerConexion();
                 PreparedStatement stm = cnx.prepareStatement(LISTAR);) {
             stm.clearParameters();
-//            stm.setString(1, usuario);
-//            stm.setString(2, tipo);
+
             try (ResultSet rs = stm.executeQuery()) {
                 while (rs.next()) {
                     Pais c = new Pais(

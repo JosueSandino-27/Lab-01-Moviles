@@ -18,6 +18,15 @@ public class Avion implements Serializable {
     private String nombreAvion;
     private Collection<Vuelo> vueloCollection;
     private TipoAvion tipoAvion;
+    private String tipoAvionString;
+
+    public String getTipoAvionString() {
+        return tipoAvionString;
+    }
+
+    public void setTipoAvionString(String tipoAvionString) {
+        this.tipoAvionString = tipoAvionString;
+    }
 
     public String getCodigo() {
         return codigo;
@@ -59,6 +68,12 @@ public class Avion implements Serializable {
         this.nombreAvion = nombreAvion;
         this.vueloCollection = vueloCollection;
         this.tipoAvion = tipoAvion;
+    }
+    
+    public Avion(String codigo, String nombreAvion, String tipoAvionString) {
+        this.codigo = codigo;
+        this.nombreAvion = nombreAvion;
+        this.tipoAvionString = tipoAvionString;
     }
 
 

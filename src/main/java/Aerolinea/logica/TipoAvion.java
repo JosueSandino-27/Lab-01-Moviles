@@ -22,6 +22,18 @@ public class TipoAvion {
     private String modelo;
     private Integer cantAsientos;
     private Collection<Avion> avionCollection;
+    
+    public TipoAvion(Integer cantidadFilas, Integer cantidadColumnas, String codigo, String nombreTipo, Integer annio, String marca, String modelo, Integer cantAsientos) {
+        this.cantidadFilas = cantidadFilas;
+        this.cantidadColumnas = cantidadColumnas;
+        this.codigo = codigo;
+        this.nombreTipo = nombreTipo;
+        this.annio = annio;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.cantAsientos = cantAsientos;
+    }
+    
 
     public Integer getCantidadFilas() {
         return cantidadFilas;
