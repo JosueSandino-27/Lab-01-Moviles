@@ -67,3 +67,139 @@ BEGIN
 	delete from proyecto2.ciudad 
     where nombre = AUX_nombre;
 END //
+
+# Procedimientos Tipo Avion
+DELIMITER // 
+create PROCEDURE  insertar_tipoAvion(
+IN AUX_cantidadFilas int,
+IN AUX_cantidadColumnas int,
+IN AUX_codigo varchar(45),
+IN AUX_nombreTipo varchar(45),
+IN AUX_annio int,
+IN AUX_marca varchar(45),
+IN AUX_modelo varchar(45),
+IN AUX_cantAsientos int)
+BEGIN
+insert into proyecto2.tipoavion(cantidadFilas, 
+cantidadColumnas, codigo, nombreTipo,
+annio,marca,modelo, cantAsientos)
+VALUES (AUX_cantidadFilas, AUX_cantidadColumnas,
+AUX_codigo,AUX_nombreTipo,AUX_annio,AUX_marca,
+AUX_modelo,AUX_cantAsientos);
+END//
+
+DELIMITER //
+create procedure listar_tiposAviones()
+BEGIN 
+	SELECT * FROM proyecto2.tipoAvion;
+END //
+
+
+DELIMITER //
+create procedure eliminar_tipoAvion(
+IN AUX_codigo varchar(45)
+)
+BEGIN 
+	delete from proyecto2.tipoAvion 
+    where codigo = AUX_codigo;
+END //
+
+# Procedimientos Avion
+DELIMITER // 
+create PROCEDURE insertar_avion(
+IN  AUX_codigo varchar(20), 
+IN AUX_nombreAvion varchar(20),
+IN AUX_tipoAvion varchar(20))
+begin
+insert into proyecto2.avion(codigo,nombreAvion, tipoavion)
+VALUES (AUX_codigo,AUX_nombreAvion, AUX_tipoAvion);
+end //
+
+-- LISTAR
+DELIMITER //
+create procedure listar_aviones()
+BEGIN 
+	SELECT * FROM proyecto2.avion;
+END //
+
+
+DELIMITER //
+create procedure eliminar_avion(
+IN AUX_codigo varchar(20)
+)
+BEGIN 
+	delete from proyecto2.avion 
+    where codigo = AUX_codigo;
+END //
+
+# Procedimientos Avion
+
+DELIMITER // 
+create PROCEDURE insertar_vuelo(
+IN  AUX_numero int, 
+IN AUX_dia varchar(20),
+IN AUX_horaSalida varchar(20),
+IN Avion varchar(20),
+IN horaLlegada time,
+IN CiudadOrigen varchar(20),
+IN CiudadDestino varchar(20))
+begin
+insert into proyecto2.vuelo(numero,dia, horaSalida,Avion,
+horaLlegada,  CiudadOrigen, CiudadDestino)
+VALUES (AUX_numero,AUX_dia, AUX_horaSalida, Avion, horaLlegada,CiudadOrigen,CiudadDestino);
+end //
+
+
+
+-- LISTAR
+DELIMITER //
+create procedure listar_vuelos()
+BEGIN 
+	SELECT * FROM proyecto2.vuelo;
+END //
+
+
+DELIMITER //
+create procedure eliminar_vuelo(
+IN AUX_numero varchar(20)
+)
+BEGIN 
+	delete from proyecto2.vuelo 
+    where numero = AUX_numero;
+END //
+
+# Procedimientos Vuelo
+
+DELIMITER // 
+create PROCEDURE insertar_vuelo(
+IN  AUX_numero int, 
+IN AUX_dia varchar(20),
+IN AUX_horaSalida varchar(20),
+IN Avion varchar(20),
+IN horaLlegada time,
+IN CiudadOrigen varchar(20),
+IN CiudadDestino varchar(20))
+begin
+insert into proyecto2.vuelo(numero,dia, horaSalida,Avion,
+horaLlegada,  CiudadOrigen, CiudadDestino)
+VALUES (AUX_numero,AUX_dia, AUX_horaSalida, Avion, horaLlegada,CiudadOrigen,CiudadDestino);
+end //
+
+
+
+-- LISTAR
+DELIMITER //
+create procedure listar_vuelos()
+BEGIN 
+	SELECT * FROM proyecto2.vuelo;
+END //
+
+
+DELIMITER //
+create procedure eliminar_vuelo(
+IN AUX_numero varchar(20)
+)
+BEGIN 
+	delete from proyecto2.vuelo 
+    where numero = AUX_numero;
+END //
