@@ -87,3 +87,19 @@ VALUES (AUX_cantidadFilas, AUX_cantidadColumnas,
 AUX_codigo,AUX_nombreTipo,AUX_annio,AUX_marca,
 AUX_modelo,AUX_cantAsientos);
 END//
+
+DELIMITER //
+create procedure listar_tiposAviones()
+BEGIN 
+	SELECT * FROM proyecto2.tipoAvion;
+END //
+
+
+DELIMITER //
+create procedure eliminar_tipoAvion(
+IN AUX_codigo varchar(45)
+)
+BEGIN 
+	delete from proyecto2.tipoAvion 
+    where codigo = AUX_codigo;
+END //
