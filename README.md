@@ -67,3 +67,23 @@ BEGIN
 	delete from proyecto2.ciudad 
     where nombre = AUX_nombre;
 END //
+
+# Procedimientos Tipo Avion
+DELIMITER // 
+create PROCEDURE  insertar_tipoAvion(
+IN AUX_cantidadFilas int,
+IN AUX_cantidadColumnas int,
+IN AUX_codigo varchar(45),
+IN AUX_nombreTipo varchar(45),
+IN AUX_annio int,
+IN AUX_marca varchar(45),
+IN AUX_modelo varchar(45),
+IN AUX_cantAsientos int)
+BEGIN
+insert into proyecto2.tipoavion(cantidadFilas, 
+cantidadColumnas, codigo, nombreTipo,
+annio,marca,modelo, cantAsientos)
+VALUES (AUX_cantidadFilas, AUX_cantidadColumnas,
+AUX_codigo,AUX_nombreTipo,AUX_annio,AUX_marca,
+AUX_modelo,AUX_cantAsientos);
+END//
