@@ -103,3 +103,32 @@ BEGIN
 	delete from proyecto2.tipoAvion 
     where codigo = AUX_codigo;
 END //
+
+# Procedimientos Avion
+DELIMITER // 
+create PROCEDURE insertar_avion(
+IN  AUX_codigo varchar(20), 
+IN AUX_nombreAvion varchar(20),
+IN AUX_tipoAvion varchar(20))
+begin
+insert into proyecto2.avion(codigo,nombreAvion, tipoavion)
+VALUES (AUX_codigo,AUX_nombreAvion, AUX_tipoAvion);
+end //
+
+-- LISTAR
+DELIMITER //
+create procedure listar_aviones()
+BEGIN 
+	SELECT * FROM proyecto2.avion;
+END //
+
+
+DELIMITER //
+create procedure eliminar_avion(
+IN AUX_codigo varchar(20)
+)
+BEGIN 
+	delete from proyecto2.avion 
+    where codigo = AUX_codigo;
+END //
+
