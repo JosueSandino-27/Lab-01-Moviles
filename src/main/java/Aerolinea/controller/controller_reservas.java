@@ -31,32 +31,18 @@ public class controller_reservas {
 
         JsonObject jsonObject = new JsonParser().parse(message).getAsJsonObject();
         String action = jsonObject.get("action").getAsString();
-        
-        
-        if ("cargar_boletos".equals(action)) {
-            JsonArray Bol = jsonObject.get("boletos").getAsJsonArray();
-            parse_Array(Bol);           
-        }
 
         if ("cargar_reservas".equals(action)) {
             String nombre = jsonObject.get("nombre").getAsString() + " " + jsonObject.get("apellido").getAsString();
             int tipoPago = parseInt(jsonObject.get("tipoPago").getAsString());
-
-            gR.insertarReserva(tipoPago, 1, "2", Boletos.get(cont), nombre);
-            cont++;
+            String boleto = jsonObject.get("boleto").getAsString();
+            
+            gR.insertarReserva(tipoPago, 1, "2", boleto, nombre);
+            
         }
 
         return null;
 
-    }
-
-    void parse_Array(JsonArray jsonObject) {
-
-        if (jsonObject != null) {
-            for (int i = 0; i < jsonObject.size(); i++) {
-                Boletos.add(jsonObject.get(i).getAsString());
-            }
-        }
     }
     
     @OnOpen
@@ -76,8 +62,6 @@ public class controller_reservas {
         System.out.println("Sesion de: " + session.getId() + " ha terminado");
     }
 
-    int cont = 0;
-    ArrayList<String> Boletos = new ArrayList();
     GestorReservas gR = new GestorReservas();
 
 }

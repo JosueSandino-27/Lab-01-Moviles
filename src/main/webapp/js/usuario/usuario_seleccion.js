@@ -53,15 +53,8 @@ function cargar_reservas() {
         boletos.push(checkboxes[i].value);
     }
     
-
-    var json = JSON.stringify({
-        "action": "cargar_boletos",
-        "boletos": boletos
-    });
-    
+    localStorage.setItem("boleto", boletos);
     localStorage.setItem("boletos", checkboxes.length);
-
-    websocket.send(json);
 
     window.location.replace("Boletos.jsp");
 }
@@ -73,16 +66,20 @@ function getNumBoletos() {
 function cargar_form() {
 
     var data = localStorage.getItem("boletos");
-
+    var bolet = localStorage.getItem("boleto");
+    var res = bolet.split(",");
+    var data1 = parseInt(data) - 1;
+    
     if (validarCamposVacios()) {
-        if (boletos.length > i) {
-            var boleto = boletos[i];
+        if (data1 > i) {
+            var boleto = res[i];
             i++;
             var json = JSON.stringify({
                 "action": "cargar_reservas",
                 "nombre": document.getElementById("nombre").value,
                 "apellido": document.getElementById("apellido").value,
-                "tipoPago": document.getElementById("pago").value
+                "tipoPago": document.getElementById("pago").value,
+                "boleto" : boleto                     
             });
 
             websocket.send(json);
@@ -91,10 +88,11 @@ function cargar_form() {
             document.getElementById("nombre").value = "";
             document.getElementById("apellido").value = "";
         } else {
-
+            window.location.replace("Boletos.jsp");
         }
     } else {
         alert("Llene los espacios en blanco");
+        window.location.replace("Boletos.jsp")
     }
 
 }

@@ -1,5 +1,6 @@
 Aerolinea\controller\Controller.class
 Aerolinea\dao\IMEC_Usuario.class
+Aerolinea\dao\GestorReservas.class
 Aerolinea\dao\GestorVuelo.class
 Aerolinea\logica\Vuelo.class
 Aerolinea\controller\controller_vuelos.class
@@ -20,6 +21,7 @@ Aerolinea\datos\BaseDatos.class
 Aerolinea\logica\Viaje.class
 Aerolinea\controller\controller_aviones.class
 Aerolinea\controller\controller_paises.class
+Aerolinea\controller\controller_reservas.class
 Aerolinea\logica\Usuario.class
 Aerolinea\logica\TipoPago.class
 Aerolinea\logica\Reserva.class
