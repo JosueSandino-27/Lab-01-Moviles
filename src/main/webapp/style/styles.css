@@ -372,3 +372,16 @@ footer .list-inline .list-inline-item {
     left:45%;
     top:190px; 
 }
+
+#logo{
+    position:relative;
+    left:-7%; 
+    height:110px;
+}
+
+#tabla{
+    position:relative;
+    top:230px;
+    width:70%;
+    left:16%;
+}

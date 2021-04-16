@@ -220,3 +220,12 @@ ol {
     color: black;
     font-size: 15px;
 }
+
+#env_asientos{
+  position:relative;
+  top:-30px;
+  left:30%;
+  background-color:greenyellow;
+  width:40%;
+  height:40px;
+}
