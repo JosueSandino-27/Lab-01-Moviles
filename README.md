@@ -68,6 +68,17 @@ BEGIN
     where nombre = AUX_nombre;
 END //
 
+
+DELIMITER // 
+create procedure modificar_ciudad(
+ IN AUX_nombre varchar(20), 
+ IN AUX_siglas_pais varchar(20))
+BEGIN
+UPDATE proyecto2.ciudad
+SET
+Pais = AUX_siglas_pais WHERE nombre =  AUX_nombre;
+END //
+
 # Procedimientos Tipo Avion
 DELIMITER // 
 create PROCEDURE  insertar_tipoAvion(
@@ -104,6 +115,25 @@ BEGIN
     where codigo = AUX_codigo;
 END //
 
+DELIMITER // 
+create procedure modificar_tipoAvion(IN AUX_cantidadFilas int, 
+IN AUX_cantidadColumnas int, 
+IN AUX_codigo varchar(45), IN AUX_nombreTipo varchar(45),
+ IN AUX_annio int, IN AUX_marca varchar(45), IN AUX_modelo varchar(45), 
+ IN AUX_cantAsientos int)
+BEGIN
+UPDATE proyecto2.tipoavion
+SET
+cantidadFilas = AUX_cantidadFilas,
+cantidadColumnas =AUX_cantidadColumnas,
+nombreTipo  = AUX_nombreTipo,
+annio = AUX_annio,
+marca = AUX_marca,
+modelo = AUX_modelo,
+cantAsientos =  AUX_cantAsientos
+ WHERE codigo =  AUX_codigo;
+END //
+
 # Procedimientos Avion
 DELIMITER // 
 create PROCEDURE insertar_avion(
@@ -131,6 +161,19 @@ BEGIN
 	delete from proyecto2.avion 
     where codigo = AUX_codigo;
 END //
+
+DELIMITER // 
+create procedure modificar_avion(
+IN AUX_codigo varchar(20),
+ IN AUX_nombreAvion varchar(20), 
+ IN AUX_tipoAvion varchar(20))
+BEGIN
+UPDATE proyecto2.avion
+SET
+nombreAvion = AUX_nombreAvion,
+TipoAvion = AUX_tipoAvion WHERE codigo =  AUX_codigo;
+END //
+
 
 # Procedimientos Avion
 
@@ -204,6 +247,23 @@ BEGIN
     where numero = AUX_numero;
 END //
 
+DELIMITER // 
+create procedure modificar_vuelo(
+IN AUX_numero int, IN AUX_dia varchar(20), 
+IN AUX_horaSalida varchar(20), IN Avion varchar(20), 
+IN horaLlegada time, IN CiudadOrigen varchar(20), 
+IN CiudadDestino varchar(20))
+BEGIN
+UPDATE proyecto2.vuelo
+SET
+dia = AUX_dia,
+horaSalida = AUX_horaSalida,
+Avion = Avion,
+horaLlegada = horaLlegada,
+CiudadOrigen = CiudadOrigen,
+CiudadDestino = CiudadDestino
+ WHERE numero =  AUX_numero;
+END //
 
 # Procedimientos Reservas
 
