@@ -175,42 +175,6 @@ TipoAvion = AUX_tipoAvion WHERE codigo =  AUX_codigo;
 END //
 
 
-# Procedimientos Avion
-
-DELIMITER // 
-create PROCEDURE insertar_vuelo(
-IN  AUX_numero int, 
-IN AUX_dia varchar(20),
-IN AUX_horaSalida varchar(20),
-IN Avion varchar(20),
-IN horaLlegada time,
-IN CiudadOrigen varchar(20),
-IN CiudadDestino varchar(20))
-begin
-insert into proyecto2.vuelo(numero,dia, horaSalida,Avion,
-horaLlegada,  CiudadOrigen, CiudadDestino)
-VALUES (AUX_numero,AUX_dia, AUX_horaSalida, Avion, horaLlegada,CiudadOrigen,CiudadDestino);
-end //
-
-
-
--- LISTAR
-DELIMITER //
-create procedure listar_vuelos()
-BEGIN 
-	SELECT * FROM proyecto2.vuelo;
-END //
-
-
-DELIMITER //
-create procedure eliminar_vuelo(
-IN AUX_numero varchar(20)
-)
-BEGIN 
-	delete from proyecto2.vuelo 
-    where numero = AUX_numero;
-END //
-
 # Procedimientos Vuelo
 
 DELIMITER // 
