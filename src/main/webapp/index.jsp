@@ -18,18 +18,25 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     </head>
-    <body onload="cargar_vuelos()">
+    <body onload='cargar_vuelos("1")'>
 
-        Origen: <input id="origen" type="text" size="30" id="username" name="Origen" name="Origen"/>
+        <p id="or">Origen: <input autocomplete="off" id="origen" type="text" size="20"  name="Origen"/></p>
+        <p id="des">Destino: <input autocomplete="off" id="destino" type="text" size="20" name="Destino"/></p>
+        <p id="d">Dia: <select name="dia" id="dia">
+                <option value="1">Lunes</option>
+                <option value="2">Martes</option>
+                <option value="3">Miercoles</option>
+                <option value="4">Jueves</option>
+                <option value="5">Viernes</option>
+                <option value="6">Sabado</option>
+                <option value="7">Domingo</option>
+            </select>
+        </p>
 
-        Destino: <input id="destino" type="text" size="30" id="Destino" name="Destino"/>
-
-        Dia: <input id="dia" type="text" size="30" id="Dia" name="Dia"/>
-
+        <button type="button" id="buscar" onclick="buscar_ID()">Buscar</button>
 
         <table id="tabla" class="table table-striped">
             <thead>
-
                 <tr class="bg-primary text-white">
                     <th>Dia</th>
                     <th>Hora Salida</th>

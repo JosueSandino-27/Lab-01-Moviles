@@ -17,7 +17,7 @@
     <body>
         <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <div id="brand"><a href="principal.jsp"><img src="style/Imagenes/logo.png" class="logo-brand" alt="logo" id="logo"></a></div>
+            <div id="brand"><a href="index.jsp"><img src="style/Imagenes/logo.png" class="logo-brand" alt="logo" id="logo"></a></div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <img src="assets/images/menu.svg">

@@ -45,7 +45,7 @@
             
             <div class="popupk" id="popupk">
                 <p>Se compraron los asientos con éxito!</p>
-                <a href="principal.jsp" onclick="hide('popupk')">Ok</a>
+                <a href="index.jsp" onclick="hide('popupk')">Ok</a>
             </div>
         </div>
 

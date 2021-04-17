@@ -14,17 +14,24 @@ websocket.onmessage = function (evt) {
 
 function listar_vuelos(evt) {
 
+
     if (evt.data.length > 3) {
-        console.log("Cargando Vuelos");
-        vuelos = JSON.parse(evt.data);
-        cargarLista_vuelos(vuelos);
+        if (evt.data !== "Coneccion Establecida") {
+            x = JSON.parse(evt.data);
+            if (x[0].numero !== undefined && x[0].dia !== undefined) {
+                console.log("Cargando Vuelos");
+                vuelos = JSON.parse(evt.data);
+                cargarLista_vuelos(vuelos);
+            }
+        }
     }
 }
 
-function cargar_vuelos() {
+function cargar_vuelos(index) {
 
     var json = JSON.stringify({
-        "action": "cargar_lista_vuel"
+        "action": "cargar_lista_vuel",
+        "valor": index
     });
     websocket.send(json);
 
@@ -43,5 +50,26 @@ function cargarLista_vuelos(lista) {
                 "<td><a href='SeleccionarAsientos.jsp' class'btn btn-primary' id='" + lista[i].numero + "'>" + "Comprar" + "</a></td>");
         list.append(tr);
     }
+}
+
+function buscar_ID(){
+    
+    var origen = document.getElementById("origen").value;
+    var destino= document.getElementById("destino").value;
+    
+    if(origen === "" && destino === "" ){
+        cargar_vuelos("1");
+    }
+    if(origen !== "" && destino === ""){
+        cargar_vuelos("2");
+    }
+    if(origen === "" && destino !== ""){
+        cargar_vuelos("3");
+    }
+    if(origen !== "" && destino !== ""){
+        cargar_vuelos("4");
+    }
+    
+       
 }
 
