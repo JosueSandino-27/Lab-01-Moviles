@@ -203,3 +203,18 @@ BEGIN
 	delete from proyecto2.vuelo 
     where numero = AUX_numero;
 END //
+
+---LISTAR RESERVAS
+DELIMITER //
+CREATE PROCEDURE insertar_reserva1(
+IN  Tpago int, 
+IN viaje int,
+IN  Idusuario varchar(200),
+IN  Asien varchar(200),
+IN  viaj varchar(200))
+begin
+insert into proyecto2.reserva(TipoPago_codigoTipoPago,Viaje_numero,Usuario_idUsuario,Asiento,Viajero)
+VALUES (Tpago,viaje,Idusuario,Asien,viaj);
+END //
+
+
