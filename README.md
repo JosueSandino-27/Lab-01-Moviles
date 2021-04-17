@@ -204,6 +204,8 @@ BEGIN
     where numero = AUX_numero;
 END //
 
+
+#Procedimientos Reservas
 ---LISTAR RESERVAS
 DELIMITER //
 CREATE PROCEDURE insertar_reserva1(
