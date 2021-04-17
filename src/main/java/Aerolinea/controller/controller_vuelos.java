@@ -5,6 +5,9 @@
  */
 package Aerolinea.controller;
 
+import Aerolinea.dao.GestorVuelo;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.IOException;
 import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
@@ -20,24 +23,19 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/controller_vuelos")
 public class controller_vuelos {
 
-  @OnMessage
+    @OnMessage
     public void onMessage(String message, Session session) throws IOException, EncodeException {
-        
-//   --------------Listar Paises
-//      String paisesJSON = gP.listarPaises();
-//        try {
-//                session.getBasicRemote().sendText(paisesJSON);
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
-//        
-       // -------------- INSERTAR PAISES
-//        gP.insertarPais("EUW", "EUW");
-//        session.getBasicRemote().sendText("EUW");
-//      //  -------------- ELIMINAR PAISES
-//        gP.eliminarPais("EUW");
-//        session.getBasicRemote().sendText("Eliminando - > " + "EUW");
 
+        JsonObject jsonObject = new JsonParser().parse(message).getAsJsonObject();
+        String action = jsonObject.get("action").getAsString();
+
+        if ("cargar_lista_vuel".equals(action)) {
+            String vuelosJSON = gV.listarVuelos();
+            try {
+                session.getBasicRemote().sendText(vuelosJSON);
+            } catch (IOException ex) {
+            }
+        }
 
     }
 
@@ -46,7 +44,7 @@ public class controller_vuelos {
         try {
             session.getBasicRemote().sendText("Coneccion Establecida");
         } catch (IOException ex) {
-            
+
         }
 
     }
@@ -56,4 +54,6 @@ public class controller_vuelos {
         //session.getBasicRemote().sendText("Coneccion terminada");
         System.out.println("Sesion de: " + session.getId() + " ha terminado");
     }
+    
+    GestorVuelo gV = new GestorVuelo();
 }

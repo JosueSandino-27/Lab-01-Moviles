@@ -78,6 +78,7 @@ function cargarLista_vuelos(lista) {
         list.append(tr);
     }
 }
+
 function insertarVuelo() {
     var json = JSON.stringify({
         "action": "insertar_vuelo",

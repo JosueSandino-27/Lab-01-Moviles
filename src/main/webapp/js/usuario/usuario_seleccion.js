@@ -11,31 +11,7 @@ websocket.onopen = function (evt) {
 
 websocket.onmessage = function (evt) {
     console.log("Message -> " + evt.data);
-    validarMensaje(evt);
 };
-
-
-function validarMensaje(evt) {
-
-    if (evt.data.length > 3) {
-        if (evt.data !== "Coneccion Establecida") {
-            x = JSON.parse(evt.data);
-
-            if (x[0].siglas !== undefined) {
-                console.log("Cargando Paises");
-                var paises = JSON.parse(evt.data);
-                cargarLista_paises(paises);
-            }
-            if (x[0].Pais !== undefined && x[0].nombre !== undefined) {
-                console.log("Cargando Ciudades");
-                var ciudades = JSON.parse(evt.data);
-                cargarLista_ciudades(ciudades);
-            }
-
-
-        }
-    }
-}
 
 //-------------------------------------CRUD reservas
 
@@ -88,25 +64,12 @@ function cargar_form() {
             document.getElementById("nombre").value = "";
             document.getElementById("apellido").value = "";
         } else {
-            window.location.replace("Boletos.jsp");
+            show('popupk');
         }
     } else {
         alert("Llene los espacios en blanco");
-        window.location.replace("Boletos.jsp")
+        window.location.replace("Boletos.jsp");
     }
-
-}
-
-function enviar_reservas() {
-    var json = JSON.stringify({
-        "action": "insertar_pais",
-        "siglas": document.getElementById("siglas_i").value,
-        "nombrePais": document.getElementById("nombrePais_i").value
-    });
-
-    websocket.send(json);
-    $("#modal_insert_paises").modal("hide");
-    location.reload();
 
 }
 
@@ -127,60 +90,7 @@ function validarCamposVacios() {
     return true;
 }
 
-//-------------------------------------CRUD Ciudades
 
-function cargar_ciudades() {
-
-    var json = JSON.stringify({
-        "action": "cargar_lista_ciudades"
-    });
-    websocket.send(json);
-}
-
-function cargarLista_ciudades(ciudades) {
-
-    var list = $("#tbody_ciudad");
-
-    for (var i = 0; i < ciudades.length; i++) {
-        var tr = $('<tr/>');
-        tr.html("<td>" + ciudades[i].nombre + "</td>" +
-                "<td>" + ciudades[i].Pais + "</td>" +
-                "<td><a href='#' onclick='eliminarCiudad(" + ciudades[i].nombre + ")' class'btn btn-primary' id='" + ciudades[i].nombre + "'>" + "Eliminar" + "</a></td>");
-        list.append(tr);
-    }
-}
-
-function insertarCiudad() {
-    var json = JSON.stringify({
-        "action": "insertar_ciudad",
-        "nombre": document.getElementById("nombre_i").value,
-        "Pais": document.getElementById("Pais_i").value
-    });
-
-    websocket.send(json);
-    $("#modal_insert_ciudades").modal("hide");
-    location.reload();
-
-}
-
-function eliminarCiudad(siglas) {
-
-    var json = JSON.stringify({
-        "action": "eliminar_ciudad",
-        "nombre": siglas.id
-    });
-
-    console.log(json);
-    websocket.send(json);
-    $("#modal_ciudades").modal("hide");
-    location.reload();
-}
-
-
-
-function reload() {
-    location.reload();
-}
 
 
 
