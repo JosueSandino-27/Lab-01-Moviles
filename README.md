@@ -205,7 +205,8 @@ BEGIN
 END //
 
 
-#Procedimientos Reservas
+# Procedimientos Reservas
+
 ---LISTAR RESERVAS
 DELIMITER //
 CREATE PROCEDURE insertar_reserva1(
