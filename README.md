@@ -60,6 +60,33 @@ BEGIN
 SELECT * FROM proyecto2.usuario WHERE nombreusuario = AUX_nombreUsuario  AND contrasena = AUX_contrasena; 
 END//
 
+ DELIMITER //
+ create procedure listar_reservas()
+ BEGIN
+ select * from proyecto2.reserva;
+ END //
+ 
+ DELIMITER // 
+ create procedure eliminar_reserva( IN AUX_numero int ) 
+ BEGIN delete from proyecto2.reserva where numeroReservas = AUX_numero; END //
+ 
+ 
+ DELIMITER // 
+ create procedure modificar_reserva( 
+ IN num int,
+ IN Tpago int, IN viaje int, 
+ IN Idusuario varchar(200), IN Asien varchar(200), 
+ IN viaj varchar(200)) 
+ BEGIN 
+ UPDATE proyecto2.reserva SET TipoPago_codigoTipoPago = Tpago ,
+Viaje_numero = viaje,
+Usuario_idUsuario = Idusuario,
+Asiento =  Asien,
+Viajero = viaj
+ WHERE numeroReservas = num;
+ END //
+ 
+
 # Procedimientos Viaje
 
 DELIMITER // 
