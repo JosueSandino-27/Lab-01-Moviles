@@ -157,6 +157,22 @@ BEGIN
 SELECT * from proyecto2.vuelo Where CiudadDestino LIKE des AND dia LIKE di AND CiudadOrigen LIKE ori;
 END //
 
+DELIMITER // 
+create PROCEDURE insertar_usuario( 
+IN AUX_nombreUsuario varchar(20), 
+IN AUX_apellidos varchar(20),
+IN AUX_correo varchar(20),
+IN AUX_fechaNacimiento varchar(20),
+IN AUX_direccion varchar(20),
+IN AUX_telefonoTrabajo varchar(20),
+IN AUX_celular varchar(20),
+IN AUX_idUsuario varchar(20),
+IN AUX_contrasena varchar(20),
+IN AUX_UsuarioAdmin tinyint) 
+begin insert into proyecto2.usuario(nombreUsuario,apellidos,correo,fechaNacimiento,direccion, telefonoTrabajo,celular, idUsuario, contrasena,UsuarioAdmin ) 
+VALUES (AUX_nombreUsuario,AUX_apellidos,AUX_correo , AUX_fechaNacimiento,AUX_direccion,  AUX_telefonoTrabajo, AUX_celular,AUX_idUsuario, AUX_contrasena, AUX_UsuarioAdmin ); 
+end //
+
 © 2021 GitHub, Inc.
 Terms
 Privacy
