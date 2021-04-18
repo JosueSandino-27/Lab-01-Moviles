@@ -60,6 +60,52 @@ BEGIN
 SELECT * FROM proyecto2.usuario WHERE nombreusuario = AUX_nombreUsuario  AND contrasena = AUX_contrasena; 
 END//
 
+# Procedimientos Viaje
+
+DELIMITER // 
+create PROCEDURE insertar_viaje(
+IN  AUX_precio int, 
+IN AUX_Fecha date,
+IN AUX_asientosDisponibles int,
+IN AUX_Vuelo int)
+begin
+insert into proyecto2.viaje(precio,Fecha, asientosDisponibles,Vuelo)
+VALUES (AUX_precio,AUX_Fecha, AUX_asientosDisponibles,AUX_Vuelo);
+end //
+
+-- LISTAR
+DELIMITER //
+create procedure listar_viajes()
+BEGIN 
+	SELECT * FROM proyecto2.viaje;
+END //
+
+
+DELIMITER //
+create procedure eliminar_viaje(
+IN AUX_numero int
+)
+BEGIN 
+	delete from proyecto2.viaje 
+    where numero = AUX_numero;
+END //
+
+DELIMITER // 
+create procedure modificar_viaje(
+IN AUX_numero int,
+IN  AUX_precio int, 
+IN AUX_Fecha date,
+IN AUX_asientosDisponibles int,
+IN AUX_Vuelo int)
+BEGIN
+UPDATE proyecto2.viaje
+SET
+precio = AUX_precio,
+Fecha = AUX_Fecha, asientosDisponibles = AUX_asientosDisponibles,
+Vuelo = AUX_Vuelo
+ WHERE numero =  AUX_numero;
+END //
+
 
 © 2021 GitHub, Inc.
 Terms
