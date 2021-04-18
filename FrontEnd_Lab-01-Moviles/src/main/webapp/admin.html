@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style/admin.css" rel="stylesheet" type="text/css"/>
+
+
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <script src="js/admin/admin.js" type="text/javascript"></script>
+        <script src="js/admin/admin_paises.js" type="text/javascript"></script>
+
+
+    </head>
+    <body>
+        <h1 class="title">Administrador</h1>
+        <div>
+
+
+        </div>
+        <div class="navBar">
+            <ul class="nav  nav-tabs justify-content-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" id="a_tipoAviones" onclick="cargar_tipoAviones()">Tipos de Aviones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="a_aviones" onclick="cargar_aviones()">Aviones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="a_paises" onclick="cargar_paises()">Paises</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="a_ciudades" onclick="cargar_ciudades()">Ciudades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="a_vuelos" onclick="cargar_vuelos()" >Vuelos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="a_reservas" onclick="cargar_reservas()" >Reservas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="a_viajes" onclick="cargar_viajes()" >Viajes</a>
+                </li>
+
+
+            </ul>
+        </div>
+
+        <!--------------------------------------------------------------------------------------------------------------- Modal Reservas -->
+        <div class="modal fade" id="modal_reserva" role="dialog">
+            <div class="modal-dialog modal-xl">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Administracion de Reservas</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <button class="btn btn-primary" id="btn_insert_reserva">Insertar nueva Reserva</button>
+
+                        <p> &nbsp;</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Numero de Reserva</th>
+                                        <th>Codigo de Pago</th>
+                                        <th>Numero de Viaje</th>
+                                        <th>Usuario</th>
+                                        <th>Asiento</th>
+                                        <th>Viajero</th>
+                                        <th><i class="fa fa-trash-o"  style="font-size:30px;"></i></th>
+                                        <th><i class="fa fa-pencil"  style="font-size:30px;"></i></th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tbody_reservas">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_insert_reserva" role="dialog">   <!--------------------------------------------------------------------- Modal Insertar Reservas -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Insertar Reserva</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+<!--                            <tr>
+                                <td><label>Numero de Reserva</label></td>
+                                <td><input type="text" id="nR_i"/></td>
+                            </tr>-->
+                            <tr>
+                                <td><label>Tipo de Pago/<label></td>
+                                <td><input type="text" id="tp_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Numero de Viaje</label></td>
+                                <td><input type="text" id="nVR_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Id de usuario</label></td>
+                                <td><input type="text" id="iduR_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Numero de Asiento</label></td>
+                                <td><input type="text" id="nAR_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Viajero</label></td>
+                                <td><input type="text" id="nVrr_i"/></td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="insertarReserva()"  type="button">Insertar</button>
+                </div>
+            </div>
+        </div>
+
+        <!--------------------------------------------------------------------------------------------------------------- Modal Viajes -->
+        <div class="modal fade" id="modal_viajes" role="dialog">
+            <div class="modal-dialog modal-xl">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Administracion de Viajes</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <button class="btn btn-primary" id="btn_insert_viaje">Insertar nuevo Viaje</button>
+
+                        <p> &nbsp;</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Numero</th>
+                                        <th>Precio</th>
+                                        <th>Fecha</th>
+                                        <th>Asientos Disponibles</th>
+                                        <th>Numero de Vuelo</th>
+                                        <th><i class="fa fa-trash-o"  style="font-size:30px;"></i></th>
+                                        <th><i class="fa fa-pencil"  style="font-size:30px;"></i></th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tbody_viajes">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_insert_viajes" role="dialog">   <!--------------------------------------------------------------------- Modal Insertar Viaje -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Insertar Viaje</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Precio</label></td>
+                                <td><input type="text" id="p_iV"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Fecha</label></td>
+                                <td><input type="text" id="f_iV"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Asientos Disponibles</label></td>
+                                <td><input type="text" id="ad_iV"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Numero de Vuelo</label></td>
+                                <td><input type="text" id="v_iV"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="insertarViaje()"  type="button">Insertar</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal_modificar_viajes" role="dialog">   <!--------------------------------------------------------------------- Modal Insertar Viaje -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modificar Viaje</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <td><label>Numero</label></td>
+                                <td><input readonly type="text" id="n_iVM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Precio</label></td>
+                                <td><input type="text" id="p_iVM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Fecha</label></td>
+                                <td><input type="text" id="f_iVM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Asientos Disponibles</label></td>
+                                <td><input type="text" id="ad_iVM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Numero de Vuelo</label></td>
+                                <td><input type="text" id="v_iVM"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="insertarPais()"  type="button">Insertar</button>
+                </div>
+            </div>
+        </div>
+
+        <!--------------------------------------------------------------------------------------------------------------- Modal Paises -->
+        <div class="modal fade" id="modal_paises" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Administracion de Paises</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <button class="btn btn-primary" id="btn_insert_pais">Insertar nuevo Pais</button>
+
+                        <p> &nbsp;</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Siglas</th>
+                                        <th>Nombre</th>
+                                        <th><i class="fa fa-trash-o"  style="font-size:30px;"></i></th>
+                                        <th><i class="fa fa-pencil"  style="font-size:30px;"></i></th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tbody123">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_insert_paises" role="dialog">   <!--------------------------------------------------------------------- Modal Insertar Paises -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Insertar Pais</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Siglas:</label></td>
+                                <td><input type="text" id="siglas_iA"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Nombre del Pais</label></td>
+                                <td><input type="text" id="nombrePais_iA"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="insertarPais()"  type="button">Insertar</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal_modificar_paises" role="dialog">   <!--------------------------------------------------------------------- Modal Modificar Paises -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modificar Pais</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Siglas:</label></td>
+                                <td><input readonly type="text" id="siglas_M"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Nombre del Pais</label></td>
+                                <td><input type="text" id="nombrePais_M"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="modificarPais()"  type="button">Modificar</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--------------------------------------------------------------------------------------------------------------- Modal Ciudades -->
+        <div class="modal fade" id="modal_ciudades" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Administracion de Ciudades</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <button class="btn btn-primary" id="btn_insert_ciudad">Insertar nueva Ciudad</button>
+
+                        <p> &nbsp;</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre </th>
+                                        <th>Pais </th>
+                                        <th><i class="fa fa-trash-o"  style="font-size:30px;"></i></th>
+                                        <th><i class="fa fa-pencil"  style="font-size:30px;"></i></th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tbody_ciudad">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_insert_ciudades" role="dialog">   <!--------------------------------------------------------------------- Modal Insertar Ciudades -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Insertar Ciudad</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Nombre</label></td>
+                                <td><input type="text" id="nombre_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Pais</label></td>
+                                <td><input type="text" id="Pais_i"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="insertarCiudad()"  type="button">Insertar</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal_modificar_ciudades" role="dialog">   <!--------------------------------------------------------------------- Modal Insertar Ciudades -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modificar Ciudad</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Nombre</label></td>
+                                <td><input readonly type="text" id="nombre_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Pais</label></td>
+                                <td><input type="text" id="Pais_iM"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="modificarCiudad()"  type="button">Insertar</button>
+                </div>
+            </div>
+        </div>
+
+        <!--------------------------------------------------------------------------------------------------------------- Modal Tipo Aviones -->
+        <div class="modal fade" id="modal_tipoAviones" role="dialog">
+            <div class="modal-dialog modal-xl">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Administracion de Tipos de Aviones</h5>
+                        <button type="button" class="close" onclick="reload()" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <button class="btn btn-primary" id="btn_insert_tipoAvion">Insertar nuevo Tipo de Avion</button>
+
+                        <p> &nbsp;</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>Cantidad de Asientos</th>
+                                        <th>Nombre de Tipo</th>
+                                        <th>Cantidad de Filas</th>
+                                        <th>Cantidad de Columnas</th>
+                                        <th>Annio</th>
+                                        <th><i class="fa fa-trash-o"  style="font-size:30px;"></i></th>
+                                        <th><i class="fa fa-pencil"  style="font-size:30px;"></i></th>
+
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tbody_tipoAvion">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_insert_TipoAvion" role="dialog">   <!--------------------------------------------------------------------- Modal Insertar Tipo Aviones -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Insertar Tipo de Avion</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Codigo</label></td>
+                                <td><input type="text" id="codigo_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Marca</label></td>
+                                <td><input type="text" id="marca_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Modelo</label></td>
+                                <td><input type="text" id="modelo_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Cantidad de Asientos</label></td>
+                                <td><input type="text" id="cA_i"/></td>
+                            </tr>
+
+                            <tr>
+                                <td><label>Nombre de Tipo</label></td>
+                                <td><input type="text" id="nombreTipo_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Cantidad de Filas</label></td>
+                                <td><input type="text" id="cF_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Cantidad de Columnas</label></td>
+                                <td><input type="text" id="cC_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Annio</label></td>
+                                <td><input type="text" id="annio_i"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="insertarTipoAvion()"  type="button">Insertar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_modificar_TipoAvion" role="dialog">   <!--------------------------------------------------------------------- Modal Modificar Tipo Aviones -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modificar Tipo de Avion</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Codigo</label></td>
+                                <td><input readonly type="text" id="codigo_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Marca</label></td>
+                                <td><input type="text" id="marca_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Modelo</label></td>
+                                <td><input type="text" id="modelo_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Cantidad de Asientos</label></td>
+                                <td><input type="text" id="cA_iM"/></td>
+                            </tr>
+
+                            <tr>
+                                <td><label>Nombre de Tipo</label></td>
+                                <td><input type="text" id="nombreTipo_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Cantidad de Filas</label></td>
+                                <td><input type="text" id="cF_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Cantidad de Columnas</label></td>
+                                <td><input type="text" id="cC_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Annio</label></td>
+                                <td><input type="text" id="annio_iM"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="modificarTipoAvion()"  type="button">Modificar</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!--------------------------------------------------------------------------------------------------------------- Modal Aviones -->
+        <div class="modal fade" id="modal_aviones" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Administracion de Aviones</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <button class="btn btn-primary" id="btn_insert_avion">Insertar nuevo Avion</button>
+
+                        <p> &nbsp;</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Nombre</th>
+                                        <th>Tipo Avion</th>
+                                        <th><i class="fa fa-trash-o"  style="font-size:30px;"></i></th>
+                                        <th><i class="fa fa-pencil"  style="font-size:30px;"></i></th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tbody_avion">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_insert_aviones" role="dialog">   <!--------------------------------------------------------------------- Modal Insertar Paises -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Insertar Avion</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Codigo</label></td>
+                                <td><input type="text" id="codigoA_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Nombre del Avion</label></td>
+                                <td><input type="text" id="nombreAvionA_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Tipo Avion</label></td>
+                                <td><input type="text" id="tipoAvionA_i"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="insertarAvion()"  type="button">Insertar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_modificar_aviones" role="dialog">   <!--------------------------------------------------------------------- Modal Modificar Paises -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modificar Avion</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Codigo</label></td>
+                                <td><input readonly type="text" id="codigoA_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Nombre del Avion</label></td>
+                                <td><input type="text" id="nombreAvionA_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Tipo Avion</label></td>
+                                <td><input type="text" id="tipoAvionA_iM"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="modificarAvion()"  type="button">Modificar</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!--------------------------------------------------------------------------------------------------------------- Modal Vuelos -->
+
+        <div class="modal fade" id="modal_vuelos" role="dialog">
+            <div class="modal-dialog modal-xl">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Administracion de Vuelos</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <button class="btn btn-primary" id="btn_insert_vuelo">Insertar nuevo Vuelo</button>
+
+                        <p> &nbsp;</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Numero</th>
+                                        <th>Dia</th>
+                                        <th>Hora Salida</th>
+                                        <th>Avion</th>
+                                        <th>Hora LLegada</th>
+                                        <th>Ciudad Origen</th>
+                                        <th>Ciudad Destino</th>
+                                        <th><i class="fa fa-trash-o"  style="font-size:30px;"></i></th>
+                                        <th><i class="fa fa-pencil"  style="font-size:30px;"></i></th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tbody_vuelo">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_insert_vuelo" role="dialog">   <!--------------------------------------------------------------------- Modal Insertar Vuelo -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Insertar Vuelo</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Numero</label></td>
+                                <td><input type="text" id="numeroV_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Dia</label></td>
+                                <td><input type="text" id="diaV_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Hora Salida</label></td>
+                                <td><input type="text" id="horaSalidaV_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Hora LLegada</label></td>
+                                <td><input type="text" id="horaLLegadaV_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>ID Avion</label></td>
+                                <td><input type="text" id="avionV_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Ciudad Origen</label></td>
+                                <td><input type="text" id="ciudadOrigenV_i"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Ciudad Destino</label></td>
+                                <td><input type="text" id="ciudadDestinoV_i"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="insertarVuelo()"  type="button">Insertar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal_modificar_vuelo" role="dialog">   <!--------------------------------------------------------------------- Modal Insertar Vuelo -->
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modificar Vuelo</h5>
+                        <button type="button" onclick="reload()" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped">
+
+                            <tr>
+                                <td><label>Numero</label></td>
+                                <td><input readonly type="text" id="numeroV_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Dia</label></td>
+                                <td><input type="text" id="diaV_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Hora Salida</label></td>
+                                <td><input type="text" id="horaSalidaV_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Hora LLegada</label></td>
+                                <td><input type="text" id="horaLLegadaV_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>ID Avion</label></td>
+                                <td><input type="text" id="avionV_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Ciudad Origen</label></td>
+                                <td><input type="text" id="ciudadOrigenV_iM"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Ciudad Destino</label></td>
+                                <td><input type="text" id="ciudadDestinoV_iM"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="modificarVuelo()"  type="button">Modificar</button>
+                </div>
+            </div>
+        </div>
+
+
+
+    </body>
+</html>
