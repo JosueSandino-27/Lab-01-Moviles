@@ -49,6 +49,16 @@ DELIMITER // create procedure modificar_vuelo( IN AUX_numero int, IN AUX_dia var
 Procedimientos Reservas
 ---LISTAR RESERVAS DELIMITER // CREATE PROCEDURE insertar_reserva1( IN Tpago int, IN viaje int, IN Idusuario varchar(200), IN Asien varchar(200), IN viaj varchar(200)) begin insert into proyecto2.reserva(TipoPago_codigoTipoPago,Viaje_numero,Usuario_idUsuario,Asiento,Viajero) VALUES (Tpago,viaje,Idusuario,Asien,viaj); END //
 
+# Procedimientos Usuario
+DELIMITER //
+create PROCEDURE verificar_usuario(
+In AUX_nombreUsuario varchar(45),
+IN AUX_contrasena varchar(45))
+BEGIN
+SELECT * FROM proyecto2.usuario WHERE nombreusuario = AUX_nombreUsuario  AND contrasena = AUX_contrasena; 
+END//
+
+
 © 2021 GitHub, Inc.
 Terms
 Privacy
