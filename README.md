@@ -134,6 +134,29 @@ Vuelo = AUX_Vuelo
 END //
 
 
+# Extra
+DELIMITER //
+create procedure listar_origen1(IN ori varchar(200),IN di varchar(100))
+BEGIN
+SELECT * from proyecto2.vuelo Where CiudadOrigen LIKE ori AND dia LIKE di;
+END //
+
+
+
+DELIMITER //
+create procedure listar_destino1(IN des varchar(200),IN di varchar(100))
+BEGIN
+SELECT * from proyecto2.vuelo Where CiudadDestino LIKE des AND dia LIKE di;
+END //
+
+
+
+DELIMITER //
+create procedure listar_origendestino(IN ori varchar(200), IN des varchar(200),IN di varchar(100))
+BEGIN
+SELECT * from proyecto2.vuelo Where CiudadDestino LIKE des AND dia LIKE di AND CiudadOrigen LIKE ori;
+END //
+
 © 2021 GitHub, Inc.
 Terms
 Privacy
