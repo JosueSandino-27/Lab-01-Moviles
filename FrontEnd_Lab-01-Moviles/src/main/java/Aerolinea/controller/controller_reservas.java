@@ -25,7 +25,7 @@ import javax.websocket.server.ServerEndpoint;
 public class controller_reservas {
 
     @OnMessage
-    public String onMessage(String message) {
+    public String onMessage(String message, Session session) {
 
         JsonObject jsonObject = new JsonParser().parse(message).getAsJsonObject();
         String action = jsonObject.get("action").getAsString();
@@ -38,6 +38,7 @@ public class controller_reservas {
             gR.insertarReserva(tipoPago, 1, "1", boleto, nombre);
             
         }
+        
 
         return null;
 
@@ -45,8 +46,9 @@ public class controller_reservas {
     
     @OnOpen
     public void onOpen(Session session) {
+        String vuelosJSON = gR.listarReservas();
         try {
-            session.getBasicRemote().sendText("Coneccion Establecida");
+            session.getBasicRemote().sendText(vuelosJSON);
             
         } catch (IOException ex) {
 

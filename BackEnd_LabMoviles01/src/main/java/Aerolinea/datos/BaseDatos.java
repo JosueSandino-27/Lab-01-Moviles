@@ -23,7 +23,7 @@ public class BaseDatos {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyecto2","root","root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyecto2","root","silla125");
             System.out.print("SE pudo conectar a la base de datos");
         } catch (ClassNotFoundException | SQLException e) {
             System.out.print("No se pudo conectar a la base de datos");

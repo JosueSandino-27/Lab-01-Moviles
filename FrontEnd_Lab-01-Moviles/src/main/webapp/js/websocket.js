@@ -35,7 +35,7 @@ function validarMensaje(evt){
     }
     if(evt.data === "0"){
         window.location.replace("index.jsp?isAdmin=0");
-        localStorage.setItem("isAdmin", "0");
+        
     }   
 }
 

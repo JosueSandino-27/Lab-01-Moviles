@@ -13,7 +13,6 @@
         
     </head>
     <body onload='cargar_vuelos()'>
-
         <div>
             <p id="or">Origen: <input autocomplete="off" id="origen" type="text" size="20"  name="Origen"/></p>
             <p id="des">Destino: <input autocomplete="off" id="destino" type="text" size="20" name="Destino"/></p>

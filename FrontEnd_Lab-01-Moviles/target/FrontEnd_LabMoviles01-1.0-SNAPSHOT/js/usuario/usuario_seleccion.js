@@ -11,6 +11,7 @@ websocket.onopen = function (evt) {
 
 websocket.onmessage = function (evt) {
     console.log("Message -> " + evt.data);
+    cargar_asientos_ocupados(evt)
 };
 
 //-------------------------------------CRUD reservas
@@ -21,7 +22,20 @@ function numero_boletos(){
     return checkboxes.length;
 }
 
+function cargar_asientos_ocupados(evt) {
+    
+    var vuelos = JSON.parse(evt.data);
+
+    for (var i = 0; i < vuelos.length; i++) {
+       document.getElementById(vuelos[i].asiento).disabled = true;
+    }
+    
+  
+}
+
 function cargar_reservas() {
+    
+    
 
     var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
 
